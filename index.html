@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Miko Sushi – Hermosillo</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #D41920;
+    --black: #0A0A0A;
+    --white: #FFFFFF;
+    --cream: #F5F0E8;
+    --gold: #C9A84C;
+    --gray: #1A1A1A;
+    --muted: #888;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .nav-logo-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.04em;
+  }
+  .nav-logo-text span { color: var(--red); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: rgba(255,255,255,0.7); text-decoration: none;
+    font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--red); }
+  .nav-cta {
+    background: var(--red); color: var(--white);
+    padding: 0.6rem 1.5rem; border-radius: 2px;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: #b5151b; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 70% at 65% 50%, rgba(212,25,32,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-content { z-index: 1; }
+  .hero-eyebrow {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block; width: 2rem; height: 1px; background: var(--gold);
+  }
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 8vw, 7.5rem);
+    line-height: 0.92;
+    letter-spacing: 0.01em;
+    margin-bottom: 1.5rem;
+  }
+  h1 .line-red { color: var(--red); display: block; }
+  .hero-sub {
+    font-size: 1.05rem; color: rgba(255,255,255,0.6);
+    line-height: 1.7; max-width: 420px; margin-bottom: 2.5rem;
+  }
+  .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--red); color: var(--white);
+    padding: 0.85rem 2rem; font-weight: 700;
+    font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
+    border: none; cursor: pointer; transition: background 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-primary:hover { background: #b5151b; }
+  .btn-outline {
+    border: 1px solid rgba(255,255,255,0.3); color: var(--white);
+    padding: 0.85rem 2rem; font-weight: 600;
+    font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase;
+    background: transparent; cursor: pointer; transition: border-color 0.2s, color 0.2s;
+    text-decoration: none; display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--white); }
+  .hero-image-wrap {
+    position: relative; z-index: 1;
+    display: flex; justify-content: center; align-items: center;
+  }
+  .hero-img-frame {
+    width: 480px; height: 560px; position: relative;
+  }
+  .hero-img-frame img {
+    width: 100%; height: 100%; object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06);
+  }
+  .hero-badge {
+    position: absolute; bottom: -1.5rem; left: -2rem;
+    background: var(--red); color: var(--white);
+    padding: 1.2rem 1.6rem; border-radius: 4px;
+    font-family: 'Bebas Neue', sans-serif;
+    box-shadow: 0 8px 24px rgba(212,25,32,0.5);
+  }
+  .hero-badge .big { font-size: 2.8rem; line-height: 1; display: block; }
+  .hero-badge .small { font-size: 0.7rem; letter-spacing: 0.15em; opacity: 0.85; }
+
+  /* ── TICKER ── */
+  .ticker {
+    background: var(--red); padding: 0.75rem 0; overflow: hidden;
+    white-space: nowrap; border-top: 2px solid rgba(0,0,0,0.2);
+  }
+  .ticker-inner {
+    display: inline-block; animation: ticker 20s linear infinite;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem; letter-spacing: 0.15em;
+  }
+  .ticker-inner span { margin: 0 2rem; opacity: 0.9; }
+  .ticker-inner .dot { color: rgba(255,255,255,0.5); }
+  @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  /* ── PROMO MIÉRCOLES ── */
+  .promo {
+    padding: 6rem 4rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    align-items: center;
+    background: var(--gray);
+    position: relative; overflow: hidden;
+  }
+  .promo::after {
+    content: '3×2';
+    position: absolute; right: -2rem; top: 50%; transform: translateY(-50%);
+    font-family: 'Bebas Neue', sans-serif; font-size: 18rem;
+    color: rgba(212,25,32,0.06); line-height: 1;
+    pointer-events: none; user-select: none;
+  }
+  .promo-tag {
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 0.75rem;
+    font-weight: 700;
+  }
+  .promo h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 5vw, 5rem);
+    line-height: 1; margin-bottom: 1.5rem;
+  }
+  .promo h2 em {
+    font-style: normal; color: var(--red);
+  }
+  .promo-desc {
+    color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 2rem;
+    font-size: 1rem;
+  }
+  .promo-note {
+    font-size: 0.78rem; color: rgba(255,255,255,0.4);
+    font-style: italic; margin-top: 1rem;
+  }
+  .promo-img {
+    border-radius: 4px; overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    aspect-ratio: 4/5;
+  }
+  .promo-img img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* ── MENÚ HIGHLIGHTS ── */
+  .menu-section { padding: 6rem 4rem; }
+  .section-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 3rem;
+  }
+  .section-label {
+    font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    line-height: 1;
+  }
+  .menu-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px;
+    background: rgba(255,255,255,0.05);
+  }
+  .menu-card {
+    background: var(--black); padding: 2rem;
+    transition: background 0.25s;
+    cursor: default;
+  }
+  .menu-card:hover { background: #111; }
+  .menu-card-img {
+    aspect-ratio: 4/3; overflow: hidden; margin-bottom: 1.2rem; border-radius: 2px;
+  }
+  .menu-card-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .menu-card:hover .menu-card-img img { transform: scale(1.05); }
+  .menu-card-cat {
+    font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 0.4rem; font-weight: 700;
+  }
+  .menu-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem; letter-spacing: 0.02em; margin-bottom: 0.5rem;
+  }
+  .menu-card p {
+    font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.6;
+  }
+
+  /* ── YAKIBONELESS ESPECIAL ── */
+  .especial {
+    padding: 6rem 4rem;
+    background: var(--gray);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem;
+    align-items: center;
+  }
+  .especial-img {
+    border-radius: 4px; overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+  }
+  .especial-img img { width: 100%; display: block; }
+  .especial-tag { font-size: 0.72rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase; margin-bottom: 0.75rem; font-weight: 700; }
+  .especial h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 4.5vw, 4.2rem); line-height: 1; margin-bottom: 1.5rem;
+  }
+  .ingredients-list {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem;
+  }
+  .tag {
+    border: 1px solid rgba(255,255,255,0.2); padding: 0.35rem 0.9rem;
+    border-radius: 100px; font-size: 0.78rem; color: rgba(255,255,255,0.7);
+    letter-spacing: 0.05em;
+  }
+  .especial-desc {
+    font-size: 1rem; color: rgba(255,255,255,0.6); line-height: 1.8;
+  }
+
+  /* ── PEDIDO ── */
+  .order-section {
+    padding: 6rem 4rem;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .order-section::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle 50% at 50% 50%, rgba(212,25,32,0.15) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .order-section h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 5rem); margin-bottom: 1rem;
+  }
+  .order-section p {
+    color: rgba(255,255,255,0.55); max-width: 500px; margin: 0 auto 2.5rem;
+    line-height: 1.7;
+  }
+  .phone-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    color: var(--red); letter-spacing: 0.05em;
+    display: block; margin-bottom: 0.5rem;
+    text-decoration: none;
+  }
+  .phone-number:hover { color: #ff2b33; }
+  .order-note { font-size: 0.8rem; color: rgba(255,255,255,0.35); margin-bottom: 2.5rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding: 3rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1.5rem;
+  }
+  .footer-logo {
+    font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem;
+  }
+  .footer-logo span { color: var(--red); }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--white); }
+  .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero, .promo, .especial {
+      grid-template-columns: 1fr; padding: 6rem 1.5rem 3rem;
+    }
+    .hero-img-frame { width: 100%; height: 340px; }
+    .hero-badge { left: 0; bottom: -1rem; }
+    .menu-section, .order-section { padding: 4rem 1.5rem; }
+    .menu-grid { grid-template-columns: 1fr; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    footer { flex-direction: column; padding: 2.5rem 1.5rem; text-align: center; }
+    .footer-links { justify-content: center; }
+    .promo::after { font-size: 8rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-inner { animation: none; }
+    .menu-card img { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-text"><span>MIKO</span> SUSHI</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#menu">Menú</a></li>
+    <li><a href="#especial">Especiales</a></li>
+    <li><a href="#promo">Promos</a></li>
+    <li><a href="#pedido">Pedidos</a></li>
+  </ul>
+  <a href="tel:6621356027" class="nav-cta">📞 Pedir ahora</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">Hermosillo, Sonora</p>
+    <h1>
+      EL MEJOR<br>
+      <span class="line-red">SUSHI</span>
+      DE LA CIUDAD
+    </h1>
+    <p class="hero-sub">
+      Rollos empanizados y naturales con los ingredientes más frescos.
+      Sabor japonés con alma sonorense.
+    </p>
+    <div class="hero-actions">
+      <a href="#menu" class="btn-primary">Ver menú</a>
+      <a href="tel:6621356027" class="btn-outline">Pedir a domicilio</a>
+    </div>
+  </div>
+  <div class="hero-image-wrap">
+    <div class="hero-img-frame">
+      <img src="imagenes/s2.png" alt="Rollo especial de Miko Sushi" onerror="this.style.background='#1a1a1a'">
+      <div class="hero-badge">
+        <span class="big">3×2</span>
+        <span class="small">MIÉRCOLES</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">r
+  <div class="ticker-inner">
+    <span>ROLLOS EMPANIZADOS</span><span class="dot">◆</span>
+    <span>ROLLOS NATURALES</span><span class="dot">◆</span>
+    <span>YAKIBONELESS</span><span class="dot">◆</span>
+    <span>SERVICIO A DOMICILIO</span><span class="dot">◆</span>
+    <span>MIÉRCOLES 3×2</span><span class="dot">◆</span>
+    <span>ROLLOS EMPANIZADOS</span><span class="dot">◆</span>
+    <span>ROLLOS NATURALES</span><span class="dot">◆</span>
+    <span>YAKIBONELESS</span><span class="dot">◆</span>
+    <span>SERVICIO A DOMICILIO</span><span class="dot">◆</span>
+    <span>MIÉRCOLES 3×2</span><span class="dot">◆</span>
+  </div>
+</div>
+
+<!-- PROMO MIÉRCOLES -->
+<section class="promo" id="promo">
+  <div>
+    <p class="promo-tag">Promoción semanal</p>
+    <h2>MIÉRCOLES<br><em>3×2</em></h2>
+    <p class="promo-desc">
+      Cada miércoles llevas tres rollos y solo pagas dos.
+      Aplica en cualquier rollo empanizado o natural de nuestro menú.
+      ¡La mejor excusa para pedir de más!
+    </p>
+    <a href="tel:6621356027" class="btn-primary">Hacer mi pedido</a>
+    <p class="promo-note">*Aplica en cualquier rollo empanizado o natural. Válido solo los miércoles.</p>
+  </div>
+  <div class="promo-img">
+    <img src="imagenes/s1.png" alt="Promo miércoles 3x2 Miko Sushi" onerror="this.style.background='#1a1a1a'; this.style.height='400px'">
+  </div>
+</section>
+
+<!-- MENÚ HIGHLIGHTS -->
+<section class="menu-section" id="menu">
+  <div class="section-header">
+    <div>
+      <p class="section-label">Lo que más nos piden</p>
+      <h2 class="section-title">NUESTROS<br>ROLLOS</h2>
+    </div>
+    <a href="tel:6621356027" class="btn-outline">Pedir por teléfono</a>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card">
+      <div class="menu-card-img">
+        <img src="imagenes/s3.jpg" alt="Rollo especial" onerror="this.style.background='#1a1a1a'">
+      </div>
+      <p class="menu-card-cat">Especialidad</p>
+      <h3>Rollo Miko</h3>
+      <p>Nuestro rollo insignia. Empanizado a la perfección, cubierto con aguacate y nuestra salsa especial.</p>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-img">
+        <img src="imagenes/s4.jpg" alt="Rollo natural" onerror="this.style.background='#1a1a1a'">
+      </div>
+      <p class="menu-card-cat">Clásico</p>
+      <h3>Rollo Natural</h3>
+      <p>Frescura en cada mordida. Ingredientes seleccionados envueltos en arroz y alga nori.</p>
+    </div>
+    <div class="menu-card">
+      <div class="menu-card-img">
+        <img src="imagenes/s5.jpg" alt="Yakiboneless especial" onerror="this.style.background='#1a1a1a'">
+      </div>
+      <p class="menu-card-cat">La estrella</p>
+      <h3>Yakiboneless</h3>
+      <p>Rollo especial sobre cama de arroz yakimeshi con boneless cookie. Una experiencia única.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ESPECIAL YAKIBONELESS -->
+<section class="especial" id="especial">
+  <div class="especial-img">
+    <img src="imagenes/s6.jpg" alt="Yakiboneless Especial Miko Sushi" onerror="this.style.background='#1a1a1a'; this.style.height='400px'">
+  </div>
+  <div>
+    <p class="especial-tag">Plato estrella</p>
+    <h2>YAKIBONELESS<br>ESPECIAL</h2>
+    <div class="ingredients-list">
+      <span class="tag">Boneless Cookie</span>
+      <span class="tag">Anguila</span>
+      <span class="tag">Sriracha</span>
+      <span class="tag">Chipotle</span>
+      <span class="tag">Salsa Especial</span>
+      <span class="tag">Arroz Yakimeshi</span>
+    </div>
+    <p class="especial-desc">
+      El plato más ambicioso de Miko Sushi. Un rollo especial montado sobre una generosa cama
+      de arroz yakimeshi, rodeado de boneless cookie crujientes, bañado en sriracha, chipotle
+      y nuestra salsa de la casa. Solo para los valientes.
+    </p>
+  </div>
+</section>
+
+<!-- PEDIDO A DOMICILIO -->
+<section class="order-section" id="pedido">
+  <p class="section-label">Sin salir de casa</p>
+  <h2>PIDE A<br>DOMICILIO</h2>
+  <p>Llevamos el sabor de Miko directamente a tu puerta. Llama y en minutos tu rollo favorito está en camino.</p>
+  <a href="tel:6621356027" class="phone-number">662 135 6027</a>
+  <p class="order-note">Llámanos o envía mensaje · Horarios de atención al teléfono</p>
+  <a href="tel:6621356027" class="btn-primary">Llamar ahora</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><span>MIKO</span> SUSHI</div>
+  <ul class="footer-links">
+    <li><a href="#menu">Menú</a></li>
+    <li><a href="#promo">Promos</a></li>
+    <li><a href="#especial">Especiales</a></li>
+    <li><a href="#pedido">Contacto</a></li>
+  </ul>
+  <p class="footer-copy">© 2026 Miko Sushi · Hermosillo, Sonora</p>
+</footer>
+
+</body>
+</html>
